@@ -84,7 +84,7 @@ print "cmp"
 print cmp([1,2,3], 5)
 
 
-import time;
+import time
 
 try:
     print "try"
@@ -168,7 +168,17 @@ ax = [1,1,1,3]
 bx = [6,7,8,9]
 print dict(zip(ax, bx))
 
-dx = {1:1000}
-print dx.get(2)
-print dx[1]
-print dx[2]
+print str(123)
+print int(str(012))
+
+import re
+print re.match("abc", "abcdeabc").span()
+
+
+phone = "123-456-7890"
+print phone
+p2 = phone.replace("-", "")
+print p2
+p3 = phone.replace(r"\D", "")
+print p3
+print re.sub(r"\D", "", phone)
