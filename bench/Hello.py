@@ -182,3 +182,46 @@ print p2
 p3 = phone.replace(r"\D", "")
 print p3
 print re.sub(r"\D", "", phone)
+
+
+
+'''
+如果不使用itertools.product()函数，python可以支持更短的写法
+注意下面python的for循环的写法
+'''
+
+
+'''
+同时遍历两个list，双重for循环在一行内完成:
+expression = a * b
+for a in x:
+    for b in y:
+        expression
+'''
+x = [1,2,3]
+y = [9,8,7]
+print [a * b for a in x for b in y]
+
+
+
+'''
+flatten 一个 list[list]
+expression = c
+for sub in z:
+    for c in sub:
+        expression
+'''
+z = [[1,2,3], [4,5,6]]
+print [c for sub in z for c in sub]
+
+
+'''
+以此类推，flatter 一个 list[list[list]]
+expression = c
+for sub in z:
+    for sub2 in sub:
+        for c in sub2:
+            expression
+'''
+z = [[[1,2],[3,3]], [[4],[5,6]]]
+print [c for sub in z for sub2 in sub for c in sub2]
