@@ -225,3 +225,24 @@ for sub in z:
 '''
 z = [[[1,2],[3,3]], [[4],[5,6]]]
 print [c for sub in z for sub2 in sub for c in sub2]
+
+
+'''
+python for loop partition
+[partition[i:i + 2] for i in range(0, len(partition), 2)]
+'''
+
+# list comprehensive:
+# https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
+
+# list 做difference
+# [item for item in map(str, range(1, 10)) if item not in existed]
+# set(list1) - set(list2)
+
+# set直接做diff
+a = {1,2,3,4}
+b = {3,2,5}
+print a - b
+
+print sorted([3,1,2])
+print any(["", 0, []])
