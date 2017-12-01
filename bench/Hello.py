@@ -1,55 +1,220 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# 上边 header 第二行注释为保证python文件中可以有中文
+
+
+
+### Hello world ###
+
 print "Hello python!", "Hello", "中文"
 
+# '''或"""生成多行string，在方法里面做为document注释，也即python多行注释
 print '''
 multiline 1
 multiline 2
 multiline 3
 '''
 
-stringVar = "hellopython again!"
-print stringVar[:]
-print stringVar[1:]
-print stringVar[:5]
-print stringVar[2:6]
-print "->" + stringVar[200:] + "<-"  # 空串，不会报错
+# python一行写不下就用 \ 收尾换行
+print "1 + 2 + 3 + 4 == ", 1 + 2 + \
+    3 + 4
 
-# array 数组
-longVar = 123L
-arrayVar = [1, "hello", 3.14, "string", longVar]
-print arrayVar[1:] + arrayVar[:-1]
+# python字符串不能和数字直接相加
+print "string" + str(123)
 
-# tuple 元组
-tupleVar = (1, "config", "value")
-# tuple二次赋值会报错
+
+
+### string 与常用方法 (不包括正则)
+string_var = "  hellopython again!"
+
+# strip()去掉空白
+print string_var.strip()
+
+# join()连接
+print ".".join(["a", 'b', 'c'])
+
+# slice操作和list类似
+print string_var[1:]    # 切片
+print "->" + string_var[200:] + "<-"  # 空串，不会报错
+print string_var[::-1]  # 反转，这个和list操作一样
+
+# r开头不做转义
+print r'abcd\t"'
+
+# string为immutable，所有的操作都返回新string
+string_var_capitalized = string_var.capitalize()
+
+
+
+### list 与常用方法
+array_var = list()
+array_var = [1, "hello", 3.14, "string"]
+
+# index -1 为最后一个元素，依次类推
+print array_var[-1]
+
+# slice 反转
+print array_var[::-1]
+array_var.append("new element")
+
+# in 判断是否contains
+print "hello" in array_var
+
+# 两个list相连 [1,2,3,4,5,6]
+print [1,2,3] + [4,5,6]
+
+# list是mutable的，所以有些操作是原位的
+sort_list = [3,2,1]
+sort_list.sort()
+print sort_list
+
+# 如果使用内置的sorted()方法，则返回新list，原list不变
+sort_list = [3,2,0]
+print sorted(sort_list)
+print sort_list
+
+
+
+### tuple 元组与常用方法
+tuple_var = tuple()
+tuple_var = (1, "config", True, False)
+
+# tuple为immutable，二次赋值会报错, 如以下被注释掉的这行
 # tupleVar[0] = 123
 
+# tuple 里面只有一个元素的时候以,结束
+single_tuple_var = (1,)
 
-# dictionary 字典
-dictVar = {1: 'one', "two": 2L}
-print dictVar[1]
-print dictVar.keys()
+# tuple由于不可变，所以可以做hash，所以tuple可以放倒set()里面，也可以做dict的key
 
-# in, not in 成员运算符
-print ("hello" in arrayVar)
 
-# is, is not, ==
+
+### set 集合与常用方法
+set_var = set()
+set_var = {1,2,3}
+
+# set 可以做集合操作
+set1 = {1,2,3}
+set2 = {2,3,4}
+print set1 - set2
+print set1.union(set2)
+
+
+
+### dictionary 字典与常用方法
+dict_var = dict()
+
+# 字典的key必须是immutable的，如int, string, tuple
+dict_var = {1: 'one', "two": 2L}
+
+# dict使用[]访问，如果元素不存在会报错
+print dict_var["two"]
+# dict使用get()访问，如果元素不存在则返回None
+print dict_var.get("two")
+
+print dict_var.has_key(1)
+
+
+
+
+### is, is not, ==
 # is 判断是否是同一个对象, 类似于Java里面==
 # == 判断是否是同一个值，类似于Java里面equals
-array1 = [1, 2, 3]
-array2 = [1, 2, 3]
-print (array1 is array2)
-print array1 == array2
+list1 = [1, 2, 3]
+list2 = [1, 2, 3]
+list3 = None
+print "(list1 is list2)", (list1 is list2)
+print "list1 == list2", list1 == list2
+print list3 is None
 
-# pass
+
+
+### pass
 # 不做任何事情，比如在定义了空方法或者在if branch里面
-flag = False
-if flag:
-    print "this is doing something"
-else:
+if True:
     pass
+
+
+
+### 异常处理 try, except, else, finally, raise
+try:
+    raise Exception()
+except:
+    print "Exception()"
+else:
+    print "fine"
+finally:
+    print "finally"
+
+
+
+
+### 在脚本内定义方法
+# 在调用时，param为必填参数，var有默认
+def general_method(param, var=1):
+    print param
+    print var
+    # 只写return或没有return，则返回None
+    return str(param) + str(var)
+
+general_method("parameter string", var=123)
+general_method("parameter string", 123)
+
+
+
+
+
+### 定义类对象 python里面好像并不常用
+
+# 继承根类object
+class Student(object):
+    # 定义在这里的都是静态变量
+    static_count = 0
+    __private_static_attribute = "__private_static_attribute"
+
+    # 构造方法
+    def __init__(self, name, age=0):
+        # 成员变量都要用self.访问
+        self.name = name
+        self.age = age
+        self.__private_attr = "private attribute"
+        Student.static_count = Student.static_count + 1
+
+    # toString方法
+    def __repr__(self):
+        return "(name: " + self.name + ", age: " + str(self.age) + ")"
+
+    # 所有方法都要有参数self, 以便访问成员变量
+    # 在调用时不必填写self
+    def intro(self):
+        print self.name, self.__private_attr
+
+    # __双下滑线开头(但没有双下划线结尾)表示私有方法，外部不能访问
+    def __private(self):
+        print "private"
+
+student1 = Student("Zhang")
+student2 = Student("Li", 20)
+print student1
+print student2.name
+print Student.static_count
+print student1.intro()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # range(): [0,1,2,3,4]
 print range(5)
@@ -62,54 +227,16 @@ lower_case = "abcde"
 print lower_case.capitalize()
 print lower_case
 
-print r'abcd\t"'
+
 
 print [[0 for x in range(5)] for row in range(3)]
 
-print None
-non = None
-print non is None
-print non == None
-print non is not None
-
-
-ar = [1,2]
-ar = (40,)
-
-x, y = 1,2
-
-
-print "cmp"
-
-print cmp([1,2,3], 5)
-
-
 import time
 
-try:
-    print "try"
-    raise Exception
-except:
-    print "excepte"
-else:
-    print "else"
-finally:
-    print "finally"
 
-def func(string):
-    print string
-    return 1
-
-print func("helloedsdf")
 
 print [1,2,3,5,76].index(76)
 
-
-def func2(name, ags = 10):
-    print name
-    print ags
-
-func2(name = "asdf", ags = 19)
 
 lam = lambda x, y, z: sum([x,y,z])/3.0
 
@@ -123,46 +250,6 @@ print li.reverse()
 print li
 
 
-class Person:
-    count = 0
-    __pri = 9
-    def __init__(self, name, age=0):
-        Person.count = Person.count + 1
-        self.name = name
-        self.age = age
-    def __repr__(self):
-        return self.name
-
-    def print_name(self):
-        print self.name
-
-p1 = Person("zhang")
-p2 = Person("wang", 8)
-
-p1.print_name()
-p2.print_name()
-print Person.count
-
-
-try:
-    raise Exception
-except:
-    print "exception"
-finally:
-    print "finally"
-
-
-class Student:
-    def __init__(self):
-        self.name = "same"
-    def __repr__(self):
-        return "all same"
-
-s1 = Student()
-s2 = Student()
-print s1 == s2
-print s1 is s2
-print s1
 
 ax = [1,1,1,3]
 bx = [6,7,8,9]
@@ -234,8 +321,9 @@ python for loop partition
 
 # list comprehensive:
 # https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions
+# https://docs.python.org/2/tutorial/index.html
 
-# list 做difference
+# list 做diff
 # [item for item in map(str, range(1, 10)) if item not in existed]
 # set(list1) - set(list2)
 
@@ -246,3 +334,14 @@ print a - b
 
 print sorted([3,1,2])
 print any(["", 0, []])
+
+with open("testdata/testdata.txt") as f:
+    print f.readline().strip()
+    print f.readline()
+
+def to_int(s):
+    return int(s)
+
+print to_int("123")
+print map(to_int, ["1", '23'])
+
