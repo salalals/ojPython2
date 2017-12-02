@@ -9,5 +9,11 @@ scipy:
 scikit-learn:
 * http://scikit-learn.org/stable/tutorial/basic/tutorial.html
 
-neural-network
+keras:
+* https://keras.io/
+
+neural-network zoo
 * http://www.asimovinstitute.org/neural-network-zoo/
+
+matplotlib
+* http://matplotlib.org/
