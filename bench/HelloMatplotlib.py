@@ -10,3 +10,4 @@ x = range(100)
 y = map(lambda x: x * x - 2 * x + 1, x)
 plt.plot(x, y)
 plt.show()
+
