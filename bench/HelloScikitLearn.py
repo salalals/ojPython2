@@ -68,7 +68,6 @@ print "k_means.labels_[1:100:12]: ", k_means.labels_[1:100:12]
 print "y_iris[1:100:12]:", y_iris[1:100:12]
 
 
-
 ### pipeline 可以将training的多个数据处理步骤组合在一起
 # 并且可配合 GridSearchCV 或 RandomizedSearchCV 使用
 from sklearn import linear_model, decomposition
